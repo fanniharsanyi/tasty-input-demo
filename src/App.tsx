@@ -33,6 +33,46 @@ const TOC = [
   ['gallery', 'Every state'],
   ['accessibility', 'Accessibility'],
   ['dos', 'Dos and don’ts'],
+  ['references', 'Prior art and references'],
+] as const;
+
+const REFERENCES = [
+  {
+    group: 'Standards bodies',
+    items: [
+      ['W3C WAI — Grouping controls', 'Group related fields in a fieldset with a legend, and give each control its own label.', 'https://www.w3.org/WAI/tutorials/forms/grouping'],
+      ['WCAG technique H71', 'The formal accessibility technique for grouping fields with fieldset and legend.', 'https://www.w3.org/TR/WCAG20-TECHS/H71.html'],
+    ],
+  },
+  {
+    group: 'Platform design systems',
+    items: [
+      ['Google — Material Design 3', 'Every text field has an always-visible label; the format hint lives in helper text below.', 'https://m3.material.io/components/text-fields/guidelines'],
+      ['IBM — Carbon', 'Placeholder in place of a label "is not recommended because it hides context and presents accessibility issues."', 'https://carbondesignsystem.com/components/text-input/accessibility/'],
+      ['Apple — Human Interface Guidelines', 'Warns against relying on placeholders, and says never to convey state by color alone.', 'https://developer.apple.com/design/human-interface-guidelines'],
+    ],
+  },
+  {
+    group: 'Product and commerce systems',
+    items: [
+      ['Shopify — Polaris', 'Placeholder is "only for supplementary information"; optional fields are marked "(optional)", not required ones.', 'https://polaris-react.shopify.com/components/selection-and-input/text-field'],
+      ['GitHub — Primer', 'Treats the visible label as required and the placeholder as an optional hint.', 'https://primer.style/'],
+    ],
+  },
+  {
+    group: 'Government systems (closest to these molecules)',
+    items: [
+      ['GOV.UK Design System', 'Address and date of birth each sit in one fieldset with a legend and per-field labels.', 'https://design-system.service.gov.uk/components/fieldset/'],
+      ['USWDS — Memorable date', 'Date of birth as three clearly labeled fields: "the simplest and most inclusive digital experience."', 'https://designsystem.digital.gov/components/memorable-date/'],
+      ['USWDS — Address and name forms', 'Ready-made templates for the same name and address groups, including the ZIP pattern.', 'https://designsystem.digital.gov/templates/form-templates/address-form/'],
+    ],
+  },
+  {
+    group: 'Research',
+    items: [
+      ['Nielsen Norman Group', '"Placeholders in form fields are harmful" — they disappear, hurt recall, and burden users with impairments.', 'https://www.nngroup.com/articles/form-design-placeholders/'],
+    ],
+  },
 ] as const;
 
 /* ---- Doc layout primitives ---- */
@@ -453,7 +493,7 @@ export default function App() {
           <Section
             id="groups"
             title="Input groups."
-            lede="An input group is a molecule — several Inputs combined into one cluster for a single thing, like a name, an address, or a date. Each field keeps its own visible label and an asterisk when it's required, and the whole set is wrapped so it reads as one unit."
+            lede="An input group is a molecule — several Inputs combined into one cluster for a single thing, like a name, an address, or a date. Each field keeps its own visible label, the whole set is wrapped so it reads as one unit, and because most fields are required, only the optional ones are marked."
           >
             <InputGroups />
             <p className="doc-note">
@@ -467,7 +507,7 @@ export default function App() {
             <ul className="doc-list">
               <li><strong>Give every field a visible, persistent label.</strong> Each label is tied to its input through htmlFor and id, so it stays put and screen readers announce it.</li>
               <li><strong>Wrap the group in a fieldset and legend.</strong> The legend names the set, so assistive tech reads "Address, Postal code" rather than "Postal code" alone.</li>
-              <li><strong>Mark required two ways.</strong> The asterisk is the visual cue, and the native required attribute carries the same meaning to assistive tech — color and shape alone aren't enough.</li>
+              <li><strong>Mark the optional fields, not every required one.</strong> When most fields are required, label the few optional ones with "(optional)" — it's quieter than asterisking the rest. Required fields still carry aria-required for assistive tech, and a lone required field outside a group can still use the asterisk.</li>
               <li><strong>Use the placeholder for format hints only.</strong> Show an example like YYYY or 1234 5678 9012 3456, never the field's name.</li>
             </ul>
 
@@ -534,6 +574,28 @@ export default function App() {
                 <Input label="Email address" required size="med" state="error" value="ada@" message="Invalid input." />
               </DoDont>
             </div>
+          </Section>
+
+          <Section
+            id="references"
+            title="Prior art and references."
+            lede="The choices in this doc match how the market-leading design systems handle inputs and grouped fields. Every one of them lands on the same rule: an always-visible label, the placeholder as a hint and never the label, and a fieldset and legend around composite fields."
+          >
+            {REFERENCES.map((block) => (
+              <div key={block.group} className="refs">
+                <SubHead>{block.group}.</SubHead>
+                <ul className="refs__list">
+                  {block.items.map(([name, takeaway, url]) => (
+                    <li key={name} className="refs__item">
+                      <a className="refs__link" href={url} target="_blank" rel="noreferrer">
+                        {name}
+                      </a>
+                      <span className="refs__takeaway">{takeaway}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </Section>
         </main>
       </div>

@@ -178,7 +178,7 @@ Make them accessible:
 
 - **Give every field a visible, persistent label.** Each label is tied to its input through `htmlFor` and `id`. Don't use placeholder text as the label — it disappears when someone types, its contrast is weak, and it isn't a real label.
 - **Wrap the group in a fieldset and legend.** The legend names the set, so assistive tech reads "Address, Postal code" rather than "Postal code" alone.
-- **Mark required two ways.** The asterisk is the visual cue, and the native `required` attribute carries the same meaning to assistive tech. Color and shape alone aren't enough.
+- **Mark the optional fields, not every required one.** When most fields in a group are required, label the few optional ones with "(optional)" rather than asterisking the rest. Required fields still carry `aria-required` for assistive tech. A lone required field outside a group can still use the asterisk.
 - **Use the placeholder for format hints only.** Show an example like `YYYY` or `1234 5678 9012 3456`, never the field's name.
 
 How to compose them:
@@ -212,3 +212,35 @@ Some sub-fields, like state or month, are Select atoms rather than Inputs. The g
 | Keep the label visible above the field.                      | Replace the label with placeholder text.                       |
 | Write errors that say what to fix.                            | Show vague errors like "Invalid input."                        |
 | Mark the smaller of the required or optional groups.          | Mark every field, which adds noise and helps no one.           |
+
+---
+
+## Prior art and references.
+
+These choices match how the market-leading design systems handle inputs and grouped fields. They all land on the same rules: an always-visible label, the placeholder as a hint and never the label, and a fieldset and legend around composite fields.
+
+Standards bodies:
+
+- [W3C WAI — Grouping controls](https://www.w3.org/WAI/tutorials/forms/grouping) — group related fields in a fieldset with a legend, and label each control.
+- [WCAG technique H71](https://www.w3.org/TR/WCAG20-TECHS/H71.html) — the formal technique for grouping fields with fieldset and legend.
+
+Platform design systems:
+
+- [Google — Material Design 3](https://m3.material.io/components/text-fields/guidelines) — every text field has an always-visible label; the format hint lives in helper text.
+- [IBM — Carbon](https://carbondesignsystem.com/components/text-input/accessibility/) — placeholder in place of a label "is not recommended because it hides context and presents accessibility issues."
+- [Apple — Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines) — warns against relying on placeholders, and says never to convey state by color alone.
+
+Product and commerce systems:
+
+- [Shopify — Polaris](https://polaris-react.shopify.com/components/selection-and-input/text-field) — placeholder is "only for supplementary information"; optional fields are marked "(optional)", not required ones.
+- [GitHub — Primer](https://primer.style/) — treats the visible label as required and the placeholder as an optional hint.
+
+Government systems, the closest match to these molecules:
+
+- [GOV.UK Design System](https://design-system.service.gov.uk/components/fieldset/) — address and date of birth each sit in one fieldset with a legend and per-field labels.
+- [USWDS — Memorable date](https://designsystem.digital.gov/components/memorable-date/) — date of birth as three clearly labeled fields, "the simplest and most inclusive digital experience."
+- [USWDS — Address and name forms](https://designsystem.digital.gov/templates/form-templates/address-form/) — ready-made templates for the same name and address groups.
+
+Research:
+
+- [Nielsen Norman Group](https://www.nngroup.com/articles/form-design-placeholders/) — "Placeholders in form fields are harmful": they disappear, hurt recall, and burden users with impairments.

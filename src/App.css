@@ -553,6 +553,41 @@ code {
   color: #8a8a8a;
 }
 
+/* ---- References ---- */
+.refs {
+  margin-bottom: 8px;
+}
+.refs__list {
+  list-style: none;
+  margin: 0 0 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.refs__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-width: 760px;
+  padding-left: 14px;
+  border-left: 2px solid #e6e6e6;
+}
+.refs__link {
+  font-size: 15px;
+  font-weight: 700;
+  color: #c2185b;
+  text-decoration: none;
+}
+.refs__link:hover {
+  text-decoration: underline;
+}
+.refs__takeaway {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--tasty-font-base);
+}
+
 /* ---- Footer ---- */
 .doc-footer {
   max-width: 1180px;

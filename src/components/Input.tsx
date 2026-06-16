@@ -8,7 +8,7 @@ export type InputState = 'default' | 'success' | 'error';
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
   /** Field label shown above the control. */
-  label?: string;
+  label?: ReactNode;
   /** Adds the asterisk marker plus the "(required)" hint and the native required attribute. */
   required?: boolean;
   /** Show the "(required)" word next to the label. Defaults to true; set false in dense groups to keep just the asterisk. */

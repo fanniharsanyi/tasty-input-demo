@@ -46,6 +46,13 @@
   color: var(--tasty-font-strong);
 }
 
+/* "(optional)" marker inside a label — quieter than the rest of the label. */
+.tasty-field__optional {
+  text-transform: none;
+  font-weight: 400;
+  color: var(--tasty-font-weak);
+}
+
 /* ---- Input control wrapper ---- */
 .tasty-input {
   position: relative;
