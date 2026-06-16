@@ -448,7 +448,7 @@ export default function App() {
             <ul className="doc-list">
               <li><strong>Resting.</strong> Empty, with a thin border and weak placeholder text.</li>
               <li><strong>Active.</strong> Holds a value but isn't focused. The border thickens and the text goes dark, so people can see at a glance which fields they've filled.</li>
-              <li><strong>Focused.</strong> Clicking into a resting field is quiet — the thin border just turns blue, so it never reads as active. Once the field has input, focus adds the full blue ring around the thickened border. The ring never replaces the border.</li>
+              <li><strong>Focused.</strong> A 2px blue ring appears around the border, the same ring whether the field is empty or filled. The border keeps its own grey color and weight — thin when empty, thick when it has a value — so focus and content stay separate signals. Clicking into an empty field shows a thin border plus the ring; it never becomes the active (thick) look until there's input. The ring sits outside the border, never replacing it.</li>
             </ul>
           </Section>
 
