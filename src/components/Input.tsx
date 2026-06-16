@@ -136,7 +136,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         data-disabled={disabled}
         data-readonly={readOnly}
       >
-        {showFocusRing && <span className="tasty-input__focus-ring" aria-hidden="true" />}
         {leftIcon && <span className="tasty-input__icon">{leftIcon}</span>}
         <input
           {...rest}

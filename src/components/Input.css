@@ -105,18 +105,10 @@
 }
 
 /* ---- Focus ring ---- */
-.tasty-input__focus-ring {
-  position: absolute;
-  inset: -2px;
-  border: 2px solid var(--tasty-focus-ring);
-  border-radius: var(--tasty-radius);
-  pointer-events: none;
-}
-/* Fields with a 1px border (empty default and read-only) hug the ring at -1px. */
-.tasty-input[data-filled='false']:not([data-state='success']):not([data-state='error'])
-  .tasty-input__focus-ring,
-.tasty-input[data-readonly='true'] .tasty-input__focus-ring {
-  inset: -1px;
+/* Drawn as a shadow just outside the border box, so the field's own border
+   stays visible and the ring sits around it rather than replacing it. */
+.tasty-input[data-focused='true'] {
+  box-shadow: 0 0 0 2px var(--tasty-focus-ring);
 }
 
 /* ---- The native input ---- */
