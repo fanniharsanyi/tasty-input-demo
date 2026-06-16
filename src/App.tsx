@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { Input, DiamondIcon } from './components/Input';
 import type { InputSize, InputState } from './components/Input';
 import { ValidationForm } from './docs/ValidationForm';
+import { InputGroups } from './docs/InputGroups';
 import './App.css';
 
 const REPO_URL = 'https://github.com/fanniharsanyi/tasty-input-demo';
@@ -27,6 +28,7 @@ const TOC = [
   ['validation', 'Validation'],
   ['disabled', 'Disabled vs read-only'],
   ['icons', 'Icons'],
+  ['groups', 'Input groups'],
   ['playground', 'Playground'],
   ['gallery', 'Every state'],
   ['accessibility', 'Accessibility'],
@@ -445,6 +447,25 @@ export default function App() {
               <li><strong>Use a leading icon to signal the field's kind,</strong> like a magnifier for search.</li>
               <li><strong>Use a trailing icon for an action or status,</strong> like a clear button or a password reveal.</li>
               <li><strong>One icon per side.</strong> Two on the same side reads as clutter.</li>
+            </ul>
+          </Section>
+
+          <Section
+            id="groups"
+            title="Input groups."
+            lede="An input group is a molecule — several Inputs combined into one labeled cluster for a single thing, like a name, an address, or a date. The legend names the whole set, and each field uses placeholder text and a red asterisk when it's required."
+          >
+            <InputGroups />
+            <p className="doc-note">
+              Fields with a chevron are Select atoms in production. They're drawn here as Inputs to show the layout.
+            </p>
+            <SubHead>How to compose them.</SubHead>
+            <ul className="doc-list">
+              <li><strong>Group the label, not every field.</strong> One legend names the set; each field carries its own accessible name through a placeholder and an aria-label.</li>
+              <li><strong>Keep a unit on one row.</strong> Month, day, and year read as one thing, so they sit together. So do city, state, and postal code.</li>
+              <li><strong>Align to a shared grid.</strong> Equal columns and a consistent gap keep field edges lined up down the form.</li>
+              <li><strong>Order fields the way people say them.</strong> First then last, month then day then year for a US date.</li>
+              <li><strong>Validate at the right level.</strong> Check a whole date as a unit, but flag a single malformed field on its own.</li>
             </ul>
           </Section>
 

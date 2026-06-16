@@ -162,6 +162,30 @@ Keep messages to one line where you can. Lead with the part that helps the perso
 
 ---
 
+## Input groups.
+
+An input group is a molecule — several Inputs combined into one labeled cluster for a single thing, like a name, an address, a date of birth, a credit card, or a time. The legend names the whole set, and each field uses placeholder text plus a red asterisk when it's required.
+
+Common groups:
+
+- **Name** — first, middle, and last on one row.
+- **Address** — country, then address lines, then city, state, and postal code.
+- **Date of birth** — month, day, and year on one row.
+- **Credit card** — name, card number, then expiry month, expiry year, and CVV.
+- **Time** — hour, minute, and AM or PM, with an optional timezone.
+
+How to compose them:
+
+- **Group the label, not every field.** One legend names the set, and each field carries its own accessible name through a placeholder and an aria-label.
+- **Keep a unit on one row.** Month, day, and year read as one thing, so they sit together. So do city, state, and postal code.
+- **Align to a shared grid.** Equal columns and a consistent gap keep field edges lined up down the form.
+- **Order fields the way people say them.** First then last, month then day then year for a US date.
+- **Validate at the right level.** Check a whole date as a unit, but flag a single malformed field on its own.
+
+Some sub-fields, like state or month, are Select atoms rather than Inputs. The group pattern stays the same.
+
+---
+
 ## Accessibility.
 
 - **Always pair a label with the control.** The component links them through `htmlFor` and `id`, so screen readers announce the field correctly.
