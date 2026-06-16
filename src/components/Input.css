@@ -87,6 +87,13 @@
   background: var(--tasty-bg-error);
 }
 
+/* Read-only: a gray surface like disabled, but the field stays focusable. */
+.tasty-input[data-readonly='true'] {
+  border-width: 1px;
+  border-color: var(--tasty-border);
+  background: var(--tasty-bg-disabled);
+}
+
 /* Disabled wins over the rules above, so it comes last. */
 .tasty-input[data-disabled='true'] {
   border-width: 1px;
@@ -105,9 +112,10 @@
   border-radius: var(--tasty-radius);
   pointer-events: none;
 }
-/* The empty field has a 1px border, so the ring hugs it at -1px. */
+/* Fields with a 1px border (empty default and read-only) hug the ring at -1px. */
 .tasty-input[data-filled='false']:not([data-state='success']):not([data-state='error'])
-  .tasty-input__focus-ring {
+  .tasty-input__focus-ring,
+.tasty-input[data-readonly='true'] .tasty-input__focus-ring {
   inset: -1px;
 }
 
@@ -147,6 +155,11 @@
   cursor: not-allowed;
 }
 
+.tasty-input[data-readonly='true']:not([data-disabled='true']) .tasty-input__control {
+  color: var(--tasty-font-weak);
+  cursor: default;
+}
+
 /* ---- Icons inside the control ---- */
 .tasty-input__icon {
   display: flex;
@@ -162,6 +175,18 @@
 .tasty-input[data-size='lrg'] .tasty-input__icon svg {
   width: 20px;
   height: 20px;
+}
+
+/* Trailing and leading icons take the state's color, matching the Figma. */
+.tasty-input[data-state='success'] .tasty-input__icon {
+  color: var(--tasty-color-success);
+}
+.tasty-input[data-state='error'] .tasty-input__icon {
+  color: var(--tasty-color-error);
+}
+.tasty-input[data-disabled='true'] .tasty-input__icon,
+.tasty-input[data-readonly='true'] .tasty-input__icon {
+  color: var(--tasty-font-disabled);
 }
 
 /* ---- Field message ---- */

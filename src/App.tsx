@@ -21,7 +21,8 @@ function InteractiveDemo() {
   const [size, setSize] = useState<InputSize>('med');
   const [state, setState] = useState<InputState>('default');
   const [required, setRequired] = useState(true);
-  const [withIcon, setWithIcon] = useState(false);
+  const [withLeftIcon, setWithLeftIcon] = useState(false);
+  const [withRightIcon, setWithRightIcon] = useState(true);
 
   const hasValue = value.length > 0;
   let status = 'Resting — empty, waiting for input.';
@@ -48,7 +49,8 @@ function InteractiveDemo() {
           state={state}
           message={message}
           placeholder="you@instructure.com"
-          leftIcon={withIcon ? <DiamondIcon /> : undefined}
+          leftIcon={withLeftIcon ? <DiamondIcon /> : undefined}
+          rightIcon={withRightIcon ? <DiamondIcon /> : undefined}
           value={value}
           onChange={(event) => setValue(event.target.value)}
           onFocus={() => setFocused(true)}
@@ -90,8 +92,13 @@ function InteractiveDemo() {
         </label>
 
         <label className="control control--checkbox">
-          <input type="checkbox" checked={withIcon} onChange={(e) => setWithIcon(e.target.checked)} />
+          <input type="checkbox" checked={withLeftIcon} onChange={(e) => setWithLeftIcon(e.target.checked)} />
           <span>Left icon</span>
+        </label>
+
+        <label className="control control--checkbox">
+          <input type="checkbox" checked={withRightIcon} onChange={(e) => setWithRightIcon(e.target.checked)} />
+          <span>Right icon</span>
         </label>
       </div>
     </section>
@@ -103,8 +110,10 @@ function Gallery() {
     <section className="gallery">
       <h2 className="demo-card__title">Every state</h2>
       <p className="demo-card__lede">
-        These mirror the Figma variants. The focused rows use the <code>hasFocus</code> override
-        so you can see the ring without clicking in.
+        These mirror the Figma variants. Focused cells use the <code>hasFocus</code> override so
+        you can see the ring without clicking in, and a trailing <code>rightIcon</code> shows where
+        an optional icon sits. The ring applies to the default, success, error, and read-only
+        fields — but never to a disabled one.
       </p>
 
       {SIZES.map((s) => (
@@ -113,35 +122,47 @@ function Gallery() {
           <div className="gallery__row">
             <div className="gallery__cell">
               <span className="gallery__caption">Resting (empty)</span>
-              <Input label="Label" required size={s.value} value="" message="This is a hint message." />
+              <Input label="Label" required size={s.value} value="" rightIcon={<DiamondIcon />} message="This is a hint message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Empty + focused</span>
-              <Input label="Label" required size={s.value} value="" hasFocus message="This is a hint message." />
+              <Input label="Label" required size={s.value} value="" hasFocus rightIcon={<DiamondIcon />} message="This is a hint message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Active (has value)</span>
-              <Input label="Label" required size={s.value} value="Input value" message="This is a hint message." />
+              <Input label="Label" required size={s.value} value="Input value" rightIcon={<DiamondIcon />} message="This is a hint message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Active + focused</span>
-              <Input label="Label" required size={s.value} value="Input value" hasFocus message="This is a hint message." />
+              <Input label="Label" required size={s.value} value="Input value" hasFocus rightIcon={<DiamondIcon />} message="This is a hint message." />
+            </div>
+            <div className="gallery__cell">
+              <span className="gallery__caption">Left + right icons</span>
+              <Input label="Label" required size={s.value} value="Input value" leftIcon={<DiamondIcon />} rightIcon={<DiamondIcon />} message="This is a hint message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Success</span>
-              <Input label="Label" required size={s.value} state="success" value="Input value" message="This is a success message." />
+              <Input label="Label" required size={s.value} state="success" value="Input value" rightIcon={<DiamondIcon />} message="This is a success message." />
+            </div>
+            <div className="gallery__cell">
+              <span className="gallery__caption">Success + focused</span>
+              <Input label="Label" required size={s.value} state="success" value="Input value" hasFocus rightIcon={<DiamondIcon />} message="This is a success message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Error</span>
-              <Input label="Label" required size={s.value} state="error" value="Input value" message="This is an error message." />
+              <Input label="Label" required size={s.value} state="error" value="Input value" rightIcon={<DiamondIcon />} message="This is an error message." />
             </div>
             <div className="gallery__cell">
-              <span className="gallery__caption">Disabled</span>
-              <Input label="Label" required size={s.value} value="Input value" disabled />
+              <span className="gallery__caption">Error + focused</span>
+              <Input label="Label" required size={s.value} state="error" value="Input value" hasFocus rightIcon={<DiamondIcon />} message="This is an error message." />
             </div>
             <div className="gallery__cell">
-              <span className="gallery__caption">Read-only, disabled</span>
-              <Input label="Label" required size={s.value} value="Input value" disabled readOnly />
+              <span className="gallery__caption">Disabled (no ring)</span>
+              <Input label="Label" required size={s.value} value="Input value" disabled rightIcon={<DiamondIcon />} />
+            </div>
+            <div className="gallery__cell">
+              <span className="gallery__caption">Read-only + focused</span>
+              <Input label="Label" required size={s.value} value="Input value" readOnly hasFocus rightIcon={<DiamondIcon />} />
             </div>
           </div>
         </div>

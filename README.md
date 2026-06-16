@@ -4,6 +4,8 @@ An interactive showcase of the redesigned Input atom from the Tasty Design Syste
 
 **Live demo:** https://fanniharsanyi.github.io/tasty-input-demo/
 
+**Guidelines:** [docs/input-guidelines.md](docs/input-guidelines.md) — anatomy, sizes, validation rules, disabled vs read-only, icons, and accessibility.
+
 ## What it shows
 
 The Input has a few looks, and the interesting part is how they combine:
