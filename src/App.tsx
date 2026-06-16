@@ -7,6 +7,8 @@ import { ValidationForm } from './docs/ValidationForm';
 import { InputGroups } from './docs/InputGroups';
 import './App.css';
 
+declare const __BUILT_AT__: string;
+
 const REPO_URL = 'https://github.com/fanniharsanyi/tasty-input-demo';
 
 const SIZES: { value: InputSize; label: string }[] = [
@@ -366,7 +368,7 @@ export default function App() {
           <div>
             <div className="doc-header__brand">Tasty Design System · Atoms</div>
             <h1 className="doc-header__title">Input documentation</h1>
-            <div className="doc-header__meta">Last updated: June 16, 2026</div>
+            <div className="doc-header__meta">Last updated: June 16, 2026 · built {__BUILT_AT__}</div>
           </div>
           <div className="doc-header__right">
             <span className="doc-header__version">Version 1.0.0</span>
