@@ -167,30 +167,56 @@ function AlertMini() {
   );
 }
 
+function CheckMini() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.5" />
+      <path d="M5.4 8.2 L7.1 9.9 L10.7 6" />
+    </svg>
+  );
+}
+
+// Group-level validation: the message sits right after the legend and the whole
+// group carries a colored accent, matching the GOV.UK fieldset error pattern.
+function DobGroup({ state }: { state: 'error' | 'success' }) {
+  const isError = state === 'error';
+  const msgId = `dob-${state}`;
+  return (
+    <fieldset className="fsval" data-state={state} aria-describedby={msgId}>
+      <legend className="fsval__legend">Date of birth</legend>
+      <p id={msgId} className="fsval__msg" data-state={state}>
+        {isError ? <AlertMini /> : <CheckMini />}
+        {isError ? 'Enter a real date — April has only 30 days.' : "That's a valid date of birth."}
+      </p>
+      <div className="igroup__row">
+        <Input size="med" label="Month" state={state} value="April" rightIcon={<Chev />} />
+        <Input size="med" label="Day" state={state} value={isError ? '31' : '30'} rightIcon={<Chev />} />
+        <Input size="med" label="Year" state={state} value="1994" />
+      </div>
+    </fieldset>
+  );
+}
+
 function ValidationLevels() {
   return (
-    <Example cols={2}>
-      <div className="gallery__cell">
-        <span className="gallery__caption">Field level — one field's own rule</span>
-        <Input label="Email address" required size="med" state="error" value="ada@" message="Enter a valid email address." />
+    <>
+      <Example cols={1}>
+        <div className="gallery__cell" style={{ maxWidth: 380 }}>
+          <span className="gallery__caption">Field level — one field's own rule</span>
+          <Input label="Email address" required size="med" state="error" value="ada@" message="Enter a valid email address." />
+        </div>
+      </Example>
+      <div className="fsval-grid">
+        <div className="gallery__cell">
+          <span className="gallery__caption">Fieldset level — error</span>
+          <DobGroup state="error" />
+        </div>
+        <div className="gallery__cell">
+          <span className="gallery__caption">Fieldset level — success</span>
+          <DobGroup state="success" />
+        </div>
       </div>
-      <div className="gallery__cell">
-        <span className="gallery__caption">Fieldset level — a cross-field rule</span>
-        <fieldset className="igroup" aria-describedby="dob-demo-error" style={{ margin: 0 }}>
-          <legend className="igroup__legend">Date of birth</legend>
-          <div className="igroup__rows">
-            <div className="igroup__row">
-              <Input size="med" label="Month" state="error" value="April" rightIcon={<Chev />} />
-              <Input size="med" label="Day" state="error" value="31" rightIcon={<Chev />} />
-              <Input size="med" label="Year" state="error" value="1994" />
-            </div>
-          </div>
-          <p id="dob-demo-error" className="igroup__error">
-            <AlertMini /> Enter a real date — April has only 30 days.
-          </p>
-        </fieldset>
-      </div>
-    </Example>
+    </>
   );
 }
 
@@ -487,6 +513,9 @@ export default function App() {
               Validation runs at two levels, and picking the right one keeps errors clear.
             </p>
             <ValidationLevels />
+            <p className="doc-note">
+              The group pattern follows GOV.UK: the error sits right after the legend, the whole group carries a colored accent, and every field in the set is flagged — so it reads as one message about the group, not a stray note under the fields.
+            </p>
             <p className="doc-body-text">
               <strong>At the field level,</strong> each input checks its own value — required, format, length, or range. The error lives on that field: a red border, a message below, aria-invalid on the input, and the message tied to it through aria-describedby. Use it for a problem contained in one field, like a malformed email, a short password, or a skipped required field.
             </p>

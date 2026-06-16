@@ -453,17 +453,53 @@ code {
   flex: 1 1 0;
   min-width: 0;
 }
-/* One error for the whole group, tied to the fieldset via aria-describedby. */
-.igroup__error {
+/* ---- Fieldset-level validation ---- */
+/* One message for the whole group, right after the legend, with a colored
+   accent down the side (the GOV.UK fieldset error pattern). */
+.fsval-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.fsval {
+  margin: 0;
+  padding: 20px 22px;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-left-width: 4px;
+  border-radius: 10px;
+}
+.fsval[data-state='error'] {
+  border-left-color: var(--tasty-color-error);
+}
+.fsval[data-state='success'] {
+  border-left-color: var(--tasty-color-success);
+}
+.fsval__legend {
+  padding: 0;
+  margin: 0 0 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--tasty-font-x-strong);
+}
+.fsval__msg {
   display: flex;
   align-items: flex-start;
   gap: var(--tasty-space-xs);
-  margin: 14px 0 0;
+  margin: 0 0 16px;
   font-size: 14px;
   line-height: 20px;
+  font-weight: 600;
+}
+.fsval__msg[data-state='error'] {
   color: var(--tasty-color-error);
 }
-.igroup__error svg {
+.fsval__msg[data-state='success'] {
+  color: var(--tasty-color-success);
+}
+.fsval__msg svg {
   flex: 0 0 auto;
   width: 16px;
   height: 16px;
@@ -629,7 +665,8 @@ code {
   .anatomy,
   .route-table,
   .dodont-row,
-  .igroup-grid {
+  .igroup-grid,
+  .fsval-grid {
     grid-template-columns: 1fr;
   }
 }
