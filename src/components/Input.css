@@ -1,0 +1,192 @@
+/* Tasty Design System — Input atom. Visuals driven by data-* attributes. */
+
+.tasty-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--tasty-space-xs);
+  width: 100%;
+  font-family: var(--tasty-font-family);
+}
+
+/* ---- Label row ---- */
+.tasty-field__label-row {
+  display: flex;
+  align-items: center;
+  gap: var(--tasty-space-xs);
+  width: 100%;
+}
+
+.tasty-field__label {
+  flex: 1 0 0;
+  min-width: 0;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--tasty-font-strong);
+  text-transform: capitalize;
+}
+
+.tasty-field__required-mark {
+  display: flex;
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  color: var(--tasty-color-error);
+}
+
+.tasty-field__required-mark svg {
+  width: 100%;
+  height: 100%;
+}
+
+.tasty-field__required-text {
+  flex: 0 0 auto;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--tasty-font-strong);
+}
+
+/* ---- Input control wrapper ---- */
+.tasty-input {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--tasty-space-sm);
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--tasty-space-sm);
+  border: 1px solid var(--tasty-border);
+  border-radius: var(--tasty-radius);
+  background: var(--tasty-color-neutral);
+}
+
+.tasty-input[data-size='sm'] {
+  height: 40px;
+}
+.tasty-input[data-size='med'] {
+  height: 50px;
+}
+.tasty-input[data-size='lrg'] {
+  height: 60px;
+}
+
+/* Active (a value is present) thickens the border to 2px. */
+.tasty-input[data-filled='true'] {
+  border-width: 2px;
+}
+
+/* Validation states tint the surface and recolor the border. */
+.tasty-input[data-state='success'] {
+  border-width: 2px;
+  border-color: var(--tasty-color-success);
+  background: var(--tasty-bg-valid);
+}
+.tasty-input[data-state='error'] {
+  border-width: 2px;
+  border-color: var(--tasty-color-error);
+  background: var(--tasty-bg-error);
+}
+
+/* Disabled wins over the rules above, so it comes last. */
+.tasty-input[data-disabled='true'] {
+  border-width: 1px;
+  border-color: var(--tasty-border-disabled);
+  background: var(--tasty-bg-disabled);
+}
+.tasty-input[data-disabled='true'][data-readonly='true'] {
+  border-color: var(--tasty-border);
+}
+
+/* ---- Focus ring ---- */
+.tasty-input__focus-ring {
+  position: absolute;
+  inset: -2px;
+  border: 2px solid var(--tasty-focus-ring);
+  border-radius: var(--tasty-radius);
+  pointer-events: none;
+}
+/* The empty field has a 1px border, so the ring hugs it at -1px. */
+.tasty-input[data-filled='false']:not([data-state='success']):not([data-state='error'])
+  .tasty-input__focus-ring {
+  inset: -1px;
+}
+
+/* ---- The native input ---- */
+.tasty-input__control {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-weight: 400;
+  color: var(--tasty-font-x-strong);
+}
+
+.tasty-input[data-size='sm'] .tasty-input__control {
+  font-size: 13px;
+}
+.tasty-input[data-size='med'] .tasty-input__control {
+  font-size: 16px;
+}
+.tasty-input[data-size='lrg'] .tasty-input__control {
+  font-size: 20px;
+}
+
+.tasty-input__control::placeholder {
+  color: var(--tasty-font-weak);
+  text-transform: capitalize;
+  opacity: 1;
+}
+
+.tasty-input[data-disabled='true'] .tasty-input__control {
+  font-weight: 300;
+  color: var(--tasty-font-disabled);
+  cursor: not-allowed;
+}
+
+/* ---- Icons inside the control ---- */
+.tasty-input__icon {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  color: var(--tasty-font-weak);
+}
+.tasty-input__icon svg {
+  width: 16px;
+  height: 16px;
+}
+.tasty-input[data-size='lrg'] .tasty-input__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ---- Field message ---- */
+.tasty-field__message {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tasty-space-xs);
+  width: 100%;
+  font-size: var(--tasty-message-font-size);
+  font-weight: 400;
+  line-height: var(--tasty-message-line-height);
+  color: var(--tasty-font-base);
+}
+.tasty-field[data-size='lrg'] .tasty-field__message {
+  font-size: 16px;
+}
+.tasty-field__message[data-state='success'] {
+  color: var(--tasty-color-success);
+}
+.tasty-field__message[data-state='error'] {
+  color: var(--tasty-color-error);
+}
+.tasty-field__message svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}

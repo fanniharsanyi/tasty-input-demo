@@ -1,0 +1,37 @@
+/*
+ * Design tokens pulled straight from the Tasty Design System Figma variables.
+ * Each value maps 1:1 to a Figma variable so the component stays in sync with design.
+ */
+:root {
+  /* Color contexts */
+  --tasty-color-neutral: #ffffff; /* Color Contexts/context-neutral */
+  --tasty-color-success: #226103; /* Color Contexts/context-success */
+  --tasty-color-error: #b51a14; /* Color Contexts/context-error */
+
+  /* Typography colors */
+  --tasty-font-strong: #222222; /* body-font-strong (label) */
+  --tasty-font-x-strong: #121212; /* body-font-x-strong (filled value) */
+  --tasty-font-base: #333333; /* body-font-base (hint message) */
+  --tasty-font-weak: #555555; /* body-font-weak (placeholder) */
+  --tasty-font-disabled: #555555; /* body-font-disabled */
+
+  /* Borders and surfaces */
+  --tasty-border: #555555; /* Gray Spectrum/@emperor + interactive-border-color */
+  --tasty-border-disabled: #cfcfcf; /* border-color */
+  --tasty-bg-disabled: #e6e6e6; /* white-space-z-index4 */
+  --tasty-bg-valid: #f0fceb; /* validation-base-valid */
+  --tasty-bg-error: #ffeded; /* validation-base-error */
+  --tasty-focus-ring: #4279b6; /* component-specific/focus-ring */
+
+  /* Spacing and shape */
+  --tasty-space-xs: 4px; /* Spacing/space-xs */
+  --tasty-space-sm: 8px; /* Spacing/space-sm */
+  --tasty-radius: 4px;
+
+  /* Field message */
+  --tasty-message-font-size: 14px; /* formFieldMessage/fontSize */
+  --tasty-message-line-height: 20px; /* formFieldMessage/lineHeight */
+
+  --tasty-font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
+}
