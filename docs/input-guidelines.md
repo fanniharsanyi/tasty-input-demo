@@ -48,9 +48,9 @@ The person already typed a value and then moved on, so the field holds content b
 
 ### Focused.
 
-The person clicked or tabbed into the field. A blue focus ring appears around the control. Focus stacks on top of resting or active, so a filled field that's focused keeps its 2px border and gains the ring. In code this is `hasFocus`, tracked automatically from real focus.
+The person clicked or tabbed into the field. Focusing a resting, empty field is quiet — the thin border turns blue, with no ring — so clicking into an untouched field never reads as active. Once the field has input, focus adds the full blue ring around the thickened border. In code this is `hasFocus`, tracked automatically from real focus.
 
-**Where the ring applies:** the default, success, error, and read-only fields all show it. A disabled field never does, because you can't focus it.
+**Where the full ring applies:** fields that already have input, plus the success and error states. An empty field shows only the quiet blue border, and a disabled field shows nothing, because you can't focus it.
 
 ---
 

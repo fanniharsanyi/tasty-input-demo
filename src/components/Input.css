@@ -114,15 +114,18 @@
 /* ---- Focus ring ---- */
 /* Drawn as a shadow just outside the border box, so the field's own border
    stays visible and the ring sits around it rather than replacing it. */
-.tasty-input[data-focused='true'] {
+/* A field that already has input (or is validating) gets the full ring when
+   focused — the active look plus focus. */
+.tasty-input[data-focused='true'][data-filled='true'],
+.tasty-input[data-focused='true'][data-state='success'],
+.tasty-input[data-focused='true'][data-state='error'] {
   box-shadow: 0 0 0 2px var(--tasty-focus-ring);
 }
-/* A resting/empty field (and read-only) keeps a lighter 1px ring on focus, so
-   clicking into an untouched field stays resting and doesn't read as active.
-   The full 2px ring appears once the field is active or in a validation state. */
-.tasty-input[data-focused='true'][data-filled='false']:not([data-state='success']):not([data-state='error']),
-.tasty-input[data-focused='true'][data-readonly='true'] {
-  box-shadow: 0 0 0 1px var(--tasty-focus-ring);
+/* A resting/empty field stays quiet on focus: no ring, just a blue border, so
+   clicking into an untouched field never reads as the active state. The full
+   ring waits until there's input. */
+.tasty-input[data-focused='true'][data-filled='false']:not([data-state='success']):not([data-state='error']) {
+  border-color: var(--tasty-focus-ring);
 }
 
 /* ---- The native input ---- */
