@@ -147,6 +147,53 @@ function Anatomy() {
   );
 }
 
+/* ---- Validation levels (field vs fieldset) ---- */
+
+function Chev() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 6 L8 10 L12 6" />
+    </svg>
+  );
+}
+
+function AlertMini() {
+  return (
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <circle cx="8" cy="8" r="6.5" />
+      <line x1="8" y1="4.5" x2="8" y2="8.9" />
+      <circle cx="8" cy="11.3" r="0.45" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+function ValidationLevels() {
+  return (
+    <Example cols={2}>
+      <div className="gallery__cell">
+        <span className="gallery__caption">Field level — one field's own rule</span>
+        <Input label="Email address" required size="med" state="error" value="ada@" message="Enter a valid email address." />
+      </div>
+      <div className="gallery__cell">
+        <span className="gallery__caption">Fieldset level — a cross-field rule</span>
+        <fieldset className="igroup" aria-describedby="dob-demo-error" style={{ margin: 0 }}>
+          <legend className="igroup__legend">Date of birth</legend>
+          <div className="igroup__rows">
+            <div className="igroup__row">
+              <Input size="med" label="Month" state="error" value="April" rightIcon={<Chev />} />
+              <Input size="med" label="Day" state="error" value="31" rightIcon={<Chev />} />
+              <Input size="med" label="Year" state="error" value="1994" />
+            </div>
+          </div>
+          <p id="dob-demo-error" className="igroup__error">
+            <AlertMini /> Enter a real date — April has only 30 days.
+          </p>
+        </fieldset>
+      </div>
+    </Example>
+  );
+}
+
 /* ---- Playground ---- */
 
 function Playground() {
@@ -434,6 +481,26 @@ export default function App() {
                 </ul>
               </div>
             </div>
+
+            <SubHead>Field level and fieldset level.</SubHead>
+            <p className="doc-body-text">
+              Validation runs at two levels, and picking the right one keeps errors clear.
+            </p>
+            <ValidationLevels />
+            <p className="doc-body-text">
+              <strong>At the field level,</strong> each input checks its own value — required, format, length, or range. The error lives on that field: a red border, a message below, aria-invalid on the input, and the message tied to it through aria-describedby. Use it for a problem contained in one field, like a malformed email, a short password, or a skipped required field.
+            </p>
+            <p className="doc-body-text">
+              <strong>At the fieldset level,</strong> the group is checked as a unit, because some rules only make sense across fields. Month 4, day 31, and year 1994 are each fine alone but form a date that doesn't exist. An end date has to fall after a start date. An address needs enough parts to be deliverable. Put one error on the fieldset, not on each field:
+            </p>
+            <ul className="doc-list">
+              <li><strong>Show the message once,</strong> near the legend or just below the group, so people don't read the same complaint three times.</li>
+              <li><strong>Tie it to the group,</strong> with aria-describedby on the fieldset (or a role="group" wrapper), and mark the fields involved with aria-invalid.</li>
+              <li><strong>Keep the legend as the group's name,</strong> so assistive tech reads "Date of birth, Enter a real date."</li>
+            </ul>
+            <p className="doc-body-text">
+              The two work together: run field-level checks on blur, run the group check once the group is complete or on submit, and don't report the same problem twice. If a field-level error already explains it, skip the group error, and the other way around. On submit, move focus to the first field involved.
+            </p>
 
             <SubHead>See it work.</SubHead>
             <p className="doc-body-text">

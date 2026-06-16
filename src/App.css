@@ -453,6 +453,22 @@ code {
   flex: 1 1 0;
   min-width: 0;
 }
+/* One error for the whole group, tied to the fieldset via aria-describedby. */
+.igroup__error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tasty-space-xs);
+  margin: 14px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--tasty-color-error);
+}
+.igroup__error svg {
+  flex: 0 0 auto;
+  width: 16px;
+  height: 16px;
+  margin-top: 2px;
+}
 
 /* ---- Playground ---- */
 .demo-card {

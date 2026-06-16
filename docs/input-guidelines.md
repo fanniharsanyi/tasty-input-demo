@@ -99,6 +99,20 @@ When errors first appear depends on how the submit button behaves. Pick one rout
 - **Always-active button (recommended).** The button stays clickable. On click, validate the whole form, highlight every error, and move focus to the first one. Pair it with on-blur checks. This works for keyboard and screen reader users, and it explains what's wrong.
 - **Disabled until valid.** The button turns on only once every field is valid. Validate inline on blur, since the button gives no reason on its own. Use it only when the rules are few and obvious — a disabled button isn't announced to assistive tech and can leave people stuck.
 
+### Field level and fieldset level.
+
+Validation runs at two levels, and picking the right one keeps errors clear.
+
+At the **field level**, each input checks its own value — required, format, length, or range. The error lives on that field: a red border, a message below, `aria-invalid` on the input, and the message tied to it through `aria-describedby`. Use it for a problem contained in one field, like a malformed email, a short password, or a skipped required field.
+
+At the **fieldset level**, the group is checked as a unit, because some rules only make sense across fields. Month 4, day 31, and year 1994 are each fine alone but form a date that doesn't exist. An end date has to fall after a start date. An address needs enough parts to be deliverable. Put one error on the fieldset, not on each field:
+
+- **Show the message once,** near the legend or just below the group, so people don't read the same complaint three times.
+- **Tie it to the group,** with `aria-describedby` on the fieldset (or a `role="group"` wrapper), and mark the fields involved with `aria-invalid`.
+- **Keep the legend as the group's name,** so assistive tech reads "Date of birth, Enter a real date."
+
+The two work together: run field-level checks on blur, run the group check once the group is complete or on submit, and don't report the same problem twice. If a field-level error already explains it, skip the group error, and the other way around. On submit, move focus to the first field involved.
+
 ---
 
 ## Disabled compared with read-only.

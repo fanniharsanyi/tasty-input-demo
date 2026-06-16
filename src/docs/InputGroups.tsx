@@ -52,58 +52,58 @@ export function InputGroups() {
     <div className="igroup-grid">
       <Group legend="Full name">
         <Row>
-          <GField label="First name" />
-          <GField label="Middle name" optional />
-          <GField label="Last name" />
+          <GField label="First name" placeholder="Ada" />
+          <GField label="Middle name" optional placeholder="Augusta" />
+          <GField label="Last name" placeholder="Lovelace" />
         </Row>
       </Group>
 
       <Group legend="Date of birth">
         <Row>
-          <GField label="Month" select />
-          <GField label="Day" select />
+          <GField label="Month" select placeholder="MM" />
+          <GField label="Day" select placeholder="DD" />
           <GField label="Year" placeholder="YYYY" />
         </Row>
       </Group>
 
       <Group legend="Address" wide>
         <Row>
-          <GField label="Country" select />
+          <GField label="Country" select placeholder="United States" />
         </Row>
         <Row>
-          <GField label="Address line 1" />
-          <GField label="Address line 2 (Apt# etc.)" optional />
+          <GField label="Address line 1" placeholder="123 Main St" />
+          <GField label="Address line 2 (Apt# etc.)" optional placeholder="Apt 4B" />
         </Row>
         <Row>
-          <GField label="City" />
-          <GField label="State" select />
+          <GField label="City" placeholder="Phoenix" />
+          <GField label="State" select placeholder="AZ" />
           <GField label="Postal code" placeholder="e.g. 85295" />
         </Row>
       </Group>
 
       <Group legend="Name as it appears on the card">
         <Row>
-          <GField label="First name" />
-          <GField label="Last name" />
+          <GField label="First name" placeholder="Ada" />
+          <GField label="Last name" placeholder="Lovelace" />
         </Row>
         <Row>
           <GField label="Card number" placeholder="1234 5678 9012 3456" />
         </Row>
         <Row>
-          <GField label="Exp month" select />
-          <GField label="Exp year" select />
+          <GField label="Exp month" select placeholder="MM" />
+          <GField label="Exp year" select placeholder="YY" />
           <GField label="CVV" placeholder="3–4 digits" />
         </Row>
       </Group>
 
       <Group legend="Set time">
         <Row>
-          <GField label="Hour" select />
-          <GField label="Minute" select />
-          <GField label="AM/PM" select />
+          <GField label="Hour" select placeholder="HH" />
+          <GField label="Minute" select placeholder="MM" />
+          <GField label="AM/PM" select placeholder="AM" />
         </Row>
         <Row>
-          <GField label="Timezone" select optional />
+          <GField label="Timezone" select optional placeholder="US Pacific" />
         </Row>
       </Group>
     </div>
