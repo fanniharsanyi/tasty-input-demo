@@ -11,6 +11,8 @@ export interface InputProps
   label?: string;
   /** Adds the asterisk marker plus the "(required)" hint and the native required attribute. */
   required?: boolean;
+  /** Show the "(required)" word next to the label. Defaults to true; set false in dense groups to keep just the asterisk. */
+  requiredText?: boolean;
   /** Visual size. Sm = 40px, Med = 50px, Lrg = 60px tall. */
   size?: InputSize;
   /** Validation state. Drives border, background, and message styling. */
@@ -75,6 +77,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
   {
     label,
     required = false,
+    requiredText = true,
     size = 'sm',
     state = 'default',
     message,
@@ -123,7 +126,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
           <label className="tasty-field__label" htmlFor={inputId}>
             {label}
           </label>
-          {required && <span className="tasty-field__required-text">(required)</span>}
+          {required && requiredText && <span className="tasty-field__required-text">(required)</span>}
         </div>
       )}
 

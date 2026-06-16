@@ -174,9 +174,15 @@ Common groups:
 - **Credit card** — name, card number, then expiry month, expiry year, and CVV.
 - **Time** — hour, minute, and AM or PM, with an optional timezone.
 
+Make them accessible:
+
+- **Give every field a visible, persistent label.** Each label is tied to its input through `htmlFor` and `id`. Don't use placeholder text as the label — it disappears when someone types, its contrast is weak, and it isn't a real label.
+- **Wrap the group in a fieldset and legend.** The legend names the set, so assistive tech reads "Address, Postal code" rather than "Postal code" alone.
+- **Mark required two ways.** The asterisk is the visual cue, and the native `required` attribute carries the same meaning to assistive tech. Color and shape alone aren't enough.
+- **Use the placeholder for format hints only.** Show an example like `YYYY` or `1234 5678 9012 3456`, never the field's name.
+
 How to compose them:
 
-- **Group the label, not every field.** One legend names the set, and each field carries its own accessible name through a placeholder and an aria-label.
 - **Keep a unit on one row.** Month, day, and year read as one thing, so they sit together. So do city, state, and postal code.
 - **Align to a shared grid.** Equal columns and a consistent gap keep field edges lined up down the form.
 - **Order fields the way people say them.** First then last, month then day then year for a US date.

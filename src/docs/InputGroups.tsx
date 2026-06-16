@@ -10,25 +10,24 @@ function Chevron() {
   );
 }
 
-// Red asterisk shown inside required fields, matching the Figma groups.
-function Star() {
-  return (
-    <svg viewBox="0 0 10 10" fill="none" stroke="#b51a14" strokeWidth={1.4} strokeLinecap="round" aria-hidden="true">
-      <line x1="5" y1="1" x2="5" y2="9" />
-      <line x1="1.5" y1="2.8" x2="8.5" y2="7.2" />
-      <line x1="8.5" y1="2.8" x2="1.5" y2="7.2" />
-    </svg>
-  );
-}
-
-function GField({ name, required = false, select = false }: { name: string; required?: boolean; select?: boolean }) {
+function GField({
+  label,
+  required = false,
+  select = false,
+  placeholder = '',
+}: {
+  label: string;
+  required?: boolean;
+  select?: boolean;
+  placeholder?: string;
+}) {
   return (
     <Input
       size="med"
-      placeholder={name}
-      aria-label={name}
+      label={label}
       required={required}
-      leftIcon={required ? <Star /> : undefined}
+      requiredText={false}
+      placeholder={placeholder}
       rightIcon={select ? <Chevron /> : undefined}
     />
   );
@@ -52,58 +51,58 @@ export function InputGroups() {
     <div className="igroup-grid">
       <Group legend="Full name">
         <Row>
-          <GField name="First name" required />
-          <GField name="Middle name" />
-          <GField name="Last name" required />
+          <GField label="First name" required />
+          <GField label="Middle name" />
+          <GField label="Last name" required />
         </Row>
       </Group>
 
       <Group legend="Date of birth">
         <Row>
-          <GField name="Month" select required />
-          <GField name="Day" select required />
-          <GField name="Year" required />
+          <GField label="Month" select required />
+          <GField label="Day" select required />
+          <GField label="Year" required placeholder="YYYY" />
         </Row>
       </Group>
 
       <Group legend="Address" wide>
         <Row>
-          <GField name="Country" select required />
+          <GField label="Country" select required />
         </Row>
         <Row>
-          <GField name="Address line 1" required />
-          <GField name="Address line 2 (Apt# etc.)" />
+          <GField label="Address line 1" required />
+          <GField label="Address line 2 (Apt# etc.)" />
         </Row>
         <Row>
-          <GField name="City" required />
-          <GField name="State" select required />
-          <GField name="Postal code" required />
+          <GField label="City" required />
+          <GField label="State" select required />
+          <GField label="Postal code" required placeholder="e.g. 85295" />
         </Row>
       </Group>
 
       <Group legend="Name as it appears on the card">
         <Row>
-          <GField name="First name" required />
-          <GField name="Last name" required />
+          <GField label="First name" required />
+          <GField label="Last name" required />
         </Row>
         <Row>
-          <GField name="Card number" required />
+          <GField label="Card number" required placeholder="1234 5678 9012 3456" />
         </Row>
         <Row>
-          <GField name="Exp month" select required />
-          <GField name="Exp year" select required />
-          <GField name="CVV" required />
+          <GField label="Exp month" select required />
+          <GField label="Exp year" select required />
+          <GField label="CVV" required placeholder="3–4 digits" />
         </Row>
       </Group>
 
       <Group legend="Set time">
         <Row>
-          <GField name="Hour" select required />
-          <GField name="Minute" select required />
-          <GField name="AM/PM" select required />
+          <GField label="Hour" select required />
+          <GField label="Minute" select required />
+          <GField label="AM/PM" select required />
         </Row>
         <Row>
-          <GField name="Timezone" select />
+          <GField label="Timezone" select />
         </Row>
       </Group>
     </div>

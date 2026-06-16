@@ -453,15 +453,26 @@ export default function App() {
           <Section
             id="groups"
             title="Input groups."
-            lede="An input group is a molecule — several Inputs combined into one labeled cluster for a single thing, like a name, an address, or a date. The legend names the whole set, and each field uses placeholder text and a red asterisk when it's required."
+            lede="An input group is a molecule — several Inputs combined into one cluster for a single thing, like a name, an address, or a date. Each field keeps its own visible label and an asterisk when it's required, and the whole set is wrapped so it reads as one unit."
           >
             <InputGroups />
             <p className="doc-note">
               Fields with a chevron are Select atoms in production. They're drawn here as Inputs to show the layout.
             </p>
+
+            <SubHead>Make them accessible.</SubHead>
+            <p className="doc-body-text">
+              An earlier draft of these groups used the field name as placeholder text. That's a common shortcut, but it's the anti-pattern the Labels rule warns about: the name vanishes the moment someone types, the gray text is low contrast, and a placeholder isn't a label. The accessible build below does this instead.
+            </p>
+            <ul className="doc-list">
+              <li><strong>Give every field a visible, persistent label.</strong> Each label is tied to its input through htmlFor and id, so it stays put and screen readers announce it.</li>
+              <li><strong>Wrap the group in a fieldset and legend.</strong> The legend names the set, so assistive tech reads "Address, Postal code" rather than "Postal code" alone.</li>
+              <li><strong>Mark required two ways.</strong> The asterisk is the visual cue, and the native required attribute carries the same meaning to assistive tech — color and shape alone aren't enough.</li>
+              <li><strong>Use the placeholder for format hints only.</strong> Show an example like YYYY or 1234 5678 9012 3456, never the field's name.</li>
+            </ul>
+
             <SubHead>How to compose them.</SubHead>
             <ul className="doc-list">
-              <li><strong>Group the label, not every field.</strong> One legend names the set; each field carries its own accessible name through a placeholder and an aria-label.</li>
               <li><strong>Keep a unit on one row.</strong> Month, day, and year read as one thing, so they sit together. So do city, state, and postal code.</li>
               <li><strong>Align to a shared grid.</strong> Equal columns and a consistent gap keep field edges lined up down the form.</li>
               <li><strong>Order fields the way people say them.</strong> First then last, month then day then year for a US date.</li>
