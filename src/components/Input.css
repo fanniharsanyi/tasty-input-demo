@@ -117,6 +117,13 @@
 .tasty-input[data-focused='true'] {
   box-shadow: 0 0 0 2px var(--tasty-focus-ring);
 }
+/* A resting/empty field (and read-only) keeps a lighter 1px ring on focus, so
+   clicking into an untouched field stays resting and doesn't read as active.
+   The full 2px ring appears once the field is active or in a validation state. */
+.tasty-input[data-focused='true'][data-filled='false']:not([data-state='success']):not([data-state='error']),
+.tasty-input[data-focused='true'][data-readonly='true'] {
+  box-shadow: 0 0 0 1px var(--tasty-focus-ring);
+}
 
 /* ---- The native input ---- */
 .tasty-input__control {
