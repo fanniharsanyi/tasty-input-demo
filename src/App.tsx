@@ -128,7 +128,7 @@ function Anatomy() {
           label="Email address"
           required
           size="med"
-          value="ada@instructure.com"
+          defaultValue="ada@instructure.com"
           rightIcon={<DiamondIcon />}
           message="This is a hint message."
         />
@@ -189,9 +189,9 @@ function DobGroup({ state }: { state: 'error' | 'success' }) {
         {isError ? 'Enter a real date — April has only 30 days.' : "That's a valid date of birth."}
       </p>
       <div className="igroup__row">
-        <Input size="med" label="Month" state={state} value="April" rightIcon={<Chev />} />
-        <Input size="med" label="Day" state={state} value={isError ? '31' : '30'} rightIcon={<Chev />} />
-        <Input size="med" label="Year" state={state} value="1994" />
+        <Input size="med" label="Month" state={state} defaultValue="April" rightIcon={<Chev />} />
+        <Input size="med" label="Day" state={state} defaultValue={isError ? '31' : '30'} rightIcon={<Chev />} />
+        <Input size="med" label="Year" state={state} defaultValue="1994" />
       </div>
     </fieldset>
   );
@@ -203,7 +203,7 @@ function ValidationLevels() {
       <Example cols={1}>
         <div className="gallery__cell" style={{ maxWidth: 380 }}>
           <span className="gallery__caption">Field level — one field's own rule</span>
-          <Input label="Email address" required size="med" state="error" value="ada@" message="Enter a valid email address." />
+          <Input label="Email address" required size="med" state="error" defaultValue="ada@" message="Enter a valid email address." />
         </div>
       </Example>
       <div className="fsval-grid">
@@ -312,39 +312,31 @@ function Gallery() {
           <div className="gallery__row">
             <div className="gallery__cell">
               <span className="gallery__caption">Resting (empty)</span>
-              <Input label="Label" required size={s.value} value="" rightIcon={<DiamondIcon />} message="This is a hint message." />
-            </div>
-            <div className="gallery__cell">
-              <span className="gallery__caption">Empty + focused</span>
-              <Input label="Label" required size={s.value} value="" hasFocus rightIcon={<DiamondIcon />} message="This is a hint message." />
+              <Input label="Label" required size={s.value} defaultValue="" rightIcon={<DiamondIcon />} message="This is a hint message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Active (has value)</span>
-              <Input label="Label" required size={s.value} value="Input value" rightIcon={<DiamondIcon />} message="This is a hint message." />
-            </div>
-            <div className="gallery__cell">
-              <span className="gallery__caption">Active + focused</span>
-              <Input label="Label" required size={s.value} value="Input value" hasFocus rightIcon={<DiamondIcon />} message="This is a hint message." />
+              <Input label="Label" required size={s.value} defaultValue="Input value" rightIcon={<DiamondIcon />} message="This is a hint message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Left + right icons</span>
-              <Input label="Label" required size={s.value} value="Input value" leftIcon={<DiamondIcon />} rightIcon={<DiamondIcon />} message="This is a hint message." />
+              <Input label="Label" required size={s.value} defaultValue="Input value" leftIcon={<DiamondIcon />} rightIcon={<DiamondIcon />} message="This is a hint message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Success</span>
-              <Input label="Label" required size={s.value} state="success" value="Input value" rightIcon={<DiamondIcon />} message="This is a success message." />
+              <Input label="Label" required size={s.value} state="success" defaultValue="Input value" rightIcon={<DiamondIcon />} message="This is a success message." />
             </div>
             <div className="gallery__cell">
               <span className="gallery__caption">Error</span>
-              <Input label="Label" required size={s.value} state="error" value="Input value" rightIcon={<DiamondIcon />} message="This is an error message." />
+              <Input label="Label" required size={s.value} state="error" defaultValue="Input value" rightIcon={<DiamondIcon />} message="This is an error message." />
             </div>
             <div className="gallery__cell">
-              <span className="gallery__caption">Disabled (no ring)</span>
-              <Input label="Label" required size={s.value} value="Input value" disabled rightIcon={<DiamondIcon />} />
+              <span className="gallery__caption">Disabled</span>
+              <Input label="Label" required size={s.value} defaultValue="Input value" disabled rightIcon={<DiamondIcon />} />
             </div>
             <div className="gallery__cell">
-              <span className="gallery__caption">Read-only + focused</span>
-              <Input label="Label" required size={s.value} value="Input value" readOnly hasFocus rightIcon={<DiamondIcon />} />
+              <span className="gallery__caption">Read-only</span>
+              <Input label="Label" required size={s.value} defaultValue="Input value" readOnly rightIcon={<DiamondIcon />} />
             </div>
           </div>
         </div>
@@ -419,7 +411,7 @@ export default function App() {
               {SIZES.map((s) => (
                 <div key={s.value} className="gallery__cell">
                   <span className="gallery__caption">{s.label}</span>
-                  <Input label="Label" required size={s.value} value="Input value" />
+                  <Input label="Label" required size={s.value} defaultValue="Input value" />
                 </div>
               ))}
             </Example>
@@ -428,20 +420,16 @@ export default function App() {
           <Section
             id="states"
             title="Interaction states."
-            lede="These three states describe where the person is in filling the field. They stack, so a field can be active and focused at once."
+            lede="These three states describe where the person is in filling the field. They stack, so a field can be active and focused at once. The fields below are live — type into the empty one, clear the filled one, and click into either to see the focus cue."
           >
-            <Example cols={3}>
+            <Example cols={2}>
               <div className="gallery__cell">
-                <span className="gallery__caption">Resting</span>
-                <Input label="Label" required size="med" value="" />
+                <span className="gallery__caption">Resting → type to fill it</span>
+                <Input label="Label" required size="med" defaultValue="" />
               </div>
               <div className="gallery__cell">
-                <span className="gallery__caption">Active (isActive)</span>
-                <Input label="Label" required size="med" value="Input value" />
-              </div>
-              <div className="gallery__cell">
-                <span className="gallery__caption">Active + focused (hasFocus)</span>
-                <Input label="Label" required size="med" value="Input value" hasFocus />
+                <span className="gallery__caption">Active → clear it to reset</span>
+                <Input label="Label" required size="med" defaultValue="Input value" />
               </div>
             </Example>
             <ul className="doc-list">
@@ -546,11 +534,11 @@ export default function App() {
             <Example cols={2}>
               <div className="gallery__cell">
                 <span className="gallery__caption">Disabled — off, not focusable</span>
-                <Input label="Label" required size="med" value="Input value" disabled rightIcon={<DiamondIcon />} />
+                <Input label="Label" required size="med" defaultValue="Input value" disabled rightIcon={<DiamondIcon />} />
               </div>
               <div className="gallery__cell">
                 <span className="gallery__caption">Read-only — focusable, copyable</span>
-                <Input label="Label" required size="med" value="Input value" readOnly hasFocus rightIcon={<DiamondIcon />} />
+                <Input label="Label" required size="med" defaultValue="Input value" readOnly rightIcon={<DiamondIcon />} />
               </div>
             </Example>
             <ul className="doc-list">
@@ -568,15 +556,15 @@ export default function App() {
             <Example cols={3}>
               <div className="gallery__cell">
                 <span className="gallery__caption">Leading icon</span>
-                <Input label="Search" size="med" value="Input value" leftIcon={<DiamondIcon />} />
+                <Input label="Search" size="med" defaultValue="Input value" leftIcon={<DiamondIcon />} />
               </div>
               <div className="gallery__cell">
                 <span className="gallery__caption">Trailing icon</span>
-                <Input label="Label" size="med" value="Input value" rightIcon={<DiamondIcon />} />
+                <Input label="Label" size="med" defaultValue="Input value" rightIcon={<DiamondIcon />} />
               </div>
               <div className="gallery__cell">
                 <span className="gallery__caption">Trailing icon, error</span>
-                <Input label="Label" size="med" state="error" value="Input value" rightIcon={<DiamondIcon />} message="This is an error message." />
+                <Input label="Label" size="med" state="error" defaultValue="Input value" rightIcon={<DiamondIcon />} message="This is an error message." />
               </div>
             </Example>
             <ul className="doc-list">
@@ -627,7 +615,7 @@ export default function App() {
           <Section
             id="gallery"
             title="Every state."
-            lede="The full matrix, mirroring the Figma variants. Focused cells use the hasFocus override so you can see the ring without clicking in, and the ring shows on every field except a disabled one."
+            lede="The full matrix, mirroring the Figma variants. Every field here is live — type into one, clear it, or click in to watch it move between resting, active, and focused. Disabled is the only one you can't focus."
           >
             <Gallery />
           </Section>
@@ -648,26 +636,26 @@ export default function App() {
           <Section id="dos" title="Dos and don’ts.">
             <div className="dodont-row">
               <DoDont type="do" caption="Validate on blur and clear the error once it's fixed, with no green on a plain field.">
-                <Input label="Full name" required size="med" value="Ada Lovelace" />
+                <Input label="Full name" required size="med" defaultValue="Ada Lovelace" />
               </DoDont>
               <DoDont type="dont" caption="Don't turn every valid field green — success loses its meaning.">
-                <Input label="Full name" required size="med" state="success" value="Ada Lovelace" message="This is a success message." />
+                <Input label="Full name" required size="med" state="success" defaultValue="Ada Lovelace" message="This is a success message." />
               </DoDont>
             </div>
             <div className="dodont-row">
               <DoDont type="do" caption="Use read-only for a value people should read or copy. It stays focusable.">
-                <Input label="Account ID" size="med" value="ACC-48213" readOnly rightIcon={<DiamondIcon />} />
+                <Input label="Account ID" size="med" defaultValue="ACC-48213" readOnly rightIcon={<DiamondIcon />} />
               </DoDont>
               <DoDont type="dont" caption="Don't disable a field whose value still matters — the keyboard skips it.">
-                <Input label="Account ID" size="med" value="ACC-48213" disabled rightIcon={<DiamondIcon />} />
+                <Input label="Account ID" size="med" defaultValue="ACC-48213" disabled rightIcon={<DiamondIcon />} />
               </DoDont>
             </div>
             <div className="dodont-row">
               <DoDont type="do" caption="Write an error that says what to fix.">
-                <Input label="Email address" required size="med" state="error" value="ada@" message="Enter a valid email address." />
+                <Input label="Email address" required size="med" state="error" defaultValue="ada@" message="Enter a valid email address." />
               </DoDont>
               <DoDont type="dont" caption="Don't show a vague error that leaves people guessing.">
-                <Input label="Email address" required size="med" state="error" value="ada@" message="Invalid input." />
+                <Input label="Email address" required size="med" state="error" defaultValue="ada@" message="Invalid input." />
               </DoDont>
             </div>
           </Section>
