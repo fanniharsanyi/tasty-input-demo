@@ -1,0 +1,77 @@
+/* Tasty Banner / alert. Solid-fill contexts, matching the Figma component. */
+.tasty-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--tasty-space-sm);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px var(--tasty-space-md, 16px);
+  border-radius: var(--tasty-radius);
+  font-family: var(--tasty-font-family);
+  color: #ffffff;
+}
+
+.tasty-banner[data-context='error'] {
+  background: var(--tasty-color-error);
+}
+.tasty-banner[data-context='warning'] {
+  background: var(--tasty-color-warning);
+}
+.tasty-banner[data-context='success'] {
+  background: var(--tasty-color-success);
+}
+.tasty-banner[data-context='info'] {
+  background: var(--tasty-color-info);
+}
+.tasty-banner[data-context='neutral'] {
+  background: var(--tasty-border);
+}
+
+.tasty-banner__icon {
+  display: flex;
+  flex: 0 0 auto;
+  margin-top: 1px;
+}
+.tasty-banner__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.tasty-banner__content {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.tasty-banner__title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 20px;
+}
+.tasty-banner__msg {
+  margin: 2px 0 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+.tasty-banner__title + .tasty-banner__msg {
+  margin-top: 2px;
+}
+
+.tasty-banner__close {
+  flex: 0 0 auto;
+  display: flex;
+  padding: 0;
+  margin-left: 8px;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.85;
+}
+.tasty-banner__close:hover {
+  opacity: 1;
+}
+.tasty-banner__close svg {
+  width: 16px;
+  height: 16px;
+}

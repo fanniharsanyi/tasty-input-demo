@@ -505,6 +505,32 @@ code {
   height: 16px;
   margin-top: 2px;
 }
+/* Banner carrying the group message, between the legend and the inputs. */
+.fsval__banner {
+  margin-bottom: 16px;
+}
+/* Suggested-address row under a group that didn't verify. */
+.addr-suggest {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  padding: 12px 14px;
+  background: #f0f1f4;
+  border-radius: 6px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--tasty-font-base);
+}
+.addr-suggest strong {
+  color: var(--tasty-font-x-strong);
+}
+.addr-suggest .btn {
+  padding: 7px 14px;
+  font-size: 13px;
+}
 
 /* ---- Playground ---- */
 .demo-card {

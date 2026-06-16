@@ -7,6 +7,8 @@
   --tasty-color-neutral: #ffffff; /* Color Contexts/context-neutral */
   --tasty-color-success: #226103; /* Color Contexts/context-success */
   --tasty-color-error: #b51a14; /* Color Contexts/context-error */
+  --tasty-color-warning: #bb540d; /* Color Contexts/context-warning */
+  --tasty-color-info: #006aa8; /* Color Contexts/context-config + action-default */
 
   /* Typography colors */
   --tasty-font-strong: #222222; /* body-font-strong (label) */
@@ -26,6 +28,8 @@
   /* Spacing and shape */
   --tasty-space-xs: 4px; /* Spacing/space-xs */
   --tasty-space-sm: 8px; /* Spacing/space-sm */
+  --tasty-space-md: 16px; /* Spacing/space-md */
+  --tasty-space-lg: 24px; /* Spacing/space-lg */
   --tasty-radius: 4px;
 
   /* Field message */

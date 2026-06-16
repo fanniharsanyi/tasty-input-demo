@@ -113,6 +113,17 @@ At the **fieldset level**, the group is checked as a unit, because some rules on
 
 The two work together: run field-level checks on blur, run the group check once the group is complete or on submit, and don't report the same problem twice. If a field-level error already explains it, skip the group error, and the other way around. On submit, move focus to the first field involved.
 
+**Where the group message goes:** in a banner at the top of the group, right after the legend and above the inputs — the same place an error summary sits on a full form. Summaries belong at the top so screen readers reach them first and focus can move to them, not below the fields where dropdowns can cover them.
+
+### Verifying an address.
+
+Address verification is the hard case, because the checker often can't say exactly which field is wrong. Follow the pattern address validators recommend: show the verified suggestion next to what was entered, explain the reason, and let people proceed.
+
+- **Highlight only the uncertain fields, not the whole address.** Put the summary in the banner and flag just the suspect field, like the postal code. If the checker can't say which part is wrong, leave the fields neutral and let the banner plus a suggested address guide the fix.
+- **Clear the field error on edit, the banner on re-check.** The moment someone edits a flagged field, drop its red back to neutral. Only clear the banner once the address re-verifies.
+- **Don't trap them on a second failure.** Keep the banner but escalate the wording, offer the suggested address, and add an "Use address as entered" override. Verification is advisory — unverified mail can still deliver.
+- **Ambiguous match is a warning, not an error.** When the checker can't disambiguate (two cities with the same street name, so the postal code is wrong but the city looks off), don't hard-flag a field you're guessing at. Show the candidate matches, let the person pick, and reserve the red error state for high-confidence, single-field problems.
+
 ---
 
 ## Disabled compared with read-only.

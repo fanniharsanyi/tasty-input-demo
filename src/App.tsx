@@ -2,6 +2,7 @@ import { useState } from 'react';
 import type { ReactNode } from 'react';
 import { Input, DiamondIcon } from './components/Input';
 import type { InputSize, InputState } from './components/Input';
+import { Banner } from './components/Banner';
 import { ValidationForm } from './docs/ValidationForm';
 import { InputGroups } from './docs/InputGroups';
 import './App.css';
@@ -157,41 +158,51 @@ function Chev() {
   );
 }
 
-function AlertMini() {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="8" cy="8" r="6.5" />
-      <line x1="8" y1="4.5" x2="8" y2="8.9" />
-      <circle cx="8" cy="11.3" r="0.45" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
-function CheckMini() {
-  return (
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <circle cx="8" cy="8" r="6.5" />
-      <path d="M5.4 8.2 L7.1 9.9 L10.7 6" />
-    </svg>
-  );
-}
-
-// Group-level validation: the message sits right after the legend and the whole
-// group carries a colored accent, matching the GOV.UK fieldset error pattern.
+// Group-level validation: a banner carries the message at the top of the group,
+// right after the legend and above the inputs — where summaries belong, so it's
+// read first and focus can move to it.
 function DobGroup({ state }: { state: 'error' | 'success' }) {
   const isError = state === 'error';
   const msgId = `dob-${state}`;
   return (
     <fieldset className="fsval" data-state={state} aria-describedby={msgId}>
       <legend className="fsval__legend">Date of birth</legend>
-      <p id={msgId} className="fsval__msg" data-state={state}>
-        {isError ? <AlertMini /> : <CheckMini />}
-        {isError ? 'Enter a real date — April has only 30 days.' : "That's a valid date of birth."}
-      </p>
+      <Banner id={msgId} context={state} className="fsval__banner" title={isError ? 'Enter a real date' : 'Date looks good'}>
+        {isError ? 'April has only 30 days — check the day.' : 'That’s a valid date of birth.'}
+      </Banner>
       <div className="igroup__row">
         <Input size="med" label="Month" state={state} defaultValue="April" rightIcon={<Chev />} />
         <Input size="med" label="Day" state={state} defaultValue={isError ? '31' : '30'} rightIcon={<Chev />} />
         <Input size="med" label="Year" state={state} defaultValue="1994" />
+      </div>
+    </fieldset>
+  );
+}
+
+// Address verification: only the field the verifier is unsure about is flagged,
+// the banner summarizes at the top, and a suggested address offers the fix.
+function AddressVerify() {
+  return (
+    <fieldset className="fsval" data-state="error" aria-describedby="addr-msg">
+      <legend className="fsval__legend">Mailing address</legend>
+      <Banner id="addr-msg" context="error" className="fsval__banner" title="We couldn't verify this address">
+        Check the highlighted field, or use the suggestion below.
+      </Banner>
+      <div className="igroup__rows">
+        <div className="igroup__row">
+          <Input size="med" label="Address line 1" defaultValue="123 Main St" />
+        </div>
+        <div className="igroup__row">
+          <Input size="med" label="City" defaultValue="Phoenix" />
+          <Input size="med" label="State" defaultValue="AZ" rightIcon={<Chev />} />
+          <Input size="med" label="Postal code" state="error" defaultValue="85295" />
+        </div>
+      </div>
+      <div className="addr-suggest">
+        <span>
+          Did you mean <strong>123 Main St, Phoenix, AZ 85021</strong>?
+        </span>
+        <button type="button" className="btn btn--ghost">Use this</button>
       </div>
     </fieldset>
   );
@@ -518,6 +529,38 @@ export default function App() {
             <p className="doc-body-text">
               The two work together: run field-level checks on blur, run the group check once the group is complete or on submit, and don't report the same problem twice. If a field-level error already explains it, skip the group error, and the other way around. On submit, move focus to the first field involved.
             </p>
+
+            <SubHead>Verifying an address.</SubHead>
+            <p className="doc-body-text">
+              Address verification is the tricky case, because the checker often can't say exactly which field is wrong. The banner sits at the top of the group (where summaries belong — read first, focus moves to it), only the field the checker is unsure about is flagged, and a suggested address offers the fix.
+            </p>
+            <div className="fsval-grid">
+              <div className="gallery__cell">
+                <span className="gallery__caption">Address that didn't verify</span>
+                <AddressVerify />
+              </div>
+            </div>
+            <p className="doc-note">
+              This follows the address-verification pattern Baymard recommends: show the verified suggestion next to what was entered, explain the reason, and let people proceed rather than trapping them.
+            </p>
+            <div className="qa">
+              <div className="qa__row">
+                <p className="qa__q">If the address won't verify, do we highlight the whole address or only the uncertain fields?</p>
+                <p className="qa__a"><strong>Only the fields the checker is unsure about.</strong> Put the summary in the banner and flag just the suspect field — here, the postal code. If the checker can't say which part is wrong, leave the fields neutral and let the banner plus the suggested address guide the fix. Reddening every field when you don't know which is wrong is misleading.</p>
+              </div>
+              <div className="qa__row">
+                <p className="qa__q">Does the field error clear when the address validates, or when the user edits the flagged field?</p>
+                <p className="qa__a"><strong>Both, at different moments.</strong> The moment someone edits a flagged field, drop its red back to neutral — stop yelling while they fix it. But only clear the banner and confirm it's resolved after the address re-verifies.</p>
+              </div>
+              <div className="qa__row">
+                <p className="qa__q">What if we re-check and still can't verify the address?</p>
+                <p className="qa__a"><strong>Don't trap them.</strong> Keep the banner but escalate the wording and offer an exit: the suggested address ("use this") and an "Use address as entered" override. Verification is advisory, not a hard gate — unverified mail can still deliver, so after a second failure let people proceed with a soft warning.</p>
+              </div>
+              <div className="qa__row">
+                <p className="qa__q">What if the postal code is wrong but the city gets flagged instead — two cities, same street name?</p>
+                <p className="qa__a"><strong>That's a warning, not a confident error.</strong> When the checker can't disambiguate, don't hard-flag a single field you're guessing at — you'll point at the city when the ZIP was the problem. Show the candidate matches ("Did you mean one of these?") and let the person pick; their choice tells you which field was off. Save the red error state for high-confidence, single-field problems.</p>
+              </div>
+            </div>
 
             <SubHead>See it work.</SubHead>
             <p className="doc-body-text">
