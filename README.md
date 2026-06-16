@@ -1,6 +1,6 @@
 # Tasty Input
 
-An interactive showcase of the redesigned Input atom from the Tasty Design System. It's a single React component plus a demo page that walks through every state.
+An interactive documentation page for the redesigned Input atom from the Tasty Design System. It's a single React component plus a doc that walks through anatomy, sizes, states, validation rules, and accessibility — with live examples beside each rule, so designers and devs read from the same source.
 
 **Live demo:** https://fanniharsanyi.github.io/tasty-input-demo/
 

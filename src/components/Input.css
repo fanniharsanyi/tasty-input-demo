@@ -137,7 +137,6 @@
 
 .tasty-input__control::placeholder {
   color: var(--tasty-font-weak);
-  text-transform: capitalize;
   opacity: 1;
 }
 

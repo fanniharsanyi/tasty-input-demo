@@ -84,6 +84,21 @@ Use success sparingly. It tints the surface green, sets a green 2px border, and 
 
 Don't mark every valid field with success. If most fields turn green on blur, the color stops meaning anything, and the form looks loud. A field that simply passes validation can stay in its plain active state.
 
+### The decisions.
+
+These are the calls a team makes once and applies everywhere. The defaults below are the recommendation.
+
+- **A required field is skipped, then filled in correctly — show success, or just clear the error?** Just clear the error. Return an ordinary field, like a first name, to its neutral active look. Success on a basic field makes green meaningless.
+- **When does success actually show?** Only on high-stakes or verified fields, such as a password that meets its rules, a coupon checked on the server, or a username confirmed free.
+- **When does the error show — on blur, or on submit?** Both. Show format and rule errors on blur, catch skipped required fields on submit, and re-check live once an error is visible.
+
+### Validation timing and the submit button.
+
+When errors first appear depends on how the submit button behaves. Pick one route per form.
+
+- **Always-active button (recommended).** The button stays clickable. On click, validate the whole form, highlight every error, and move focus to the first one. Pair it with on-blur checks. This works for keyboard and screen reader users, and it explains what's wrong.
+- **Disabled until valid.** The button turns on only once every field is valid. Validate inline on blur, since the button gives no reason on its own. Use it only when the rules are few and obvious — a disabled button isn't announced to assistive tech and can leave people stuck.
+
 ---
 
 ## Disabled compared with read-only.
